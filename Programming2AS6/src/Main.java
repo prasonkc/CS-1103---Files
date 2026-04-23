@@ -90,6 +90,8 @@ public class Main {
     private static void addItem(
             Scanner scanner,
             LibraryCatalog<Integer, LibraryItem<Integer>> catalog) {
+        System.out.print("Enter item type (book/dvd): ");
+        String itemType = scanner.nextLine().trim().toLowerCase();
 
         System.out.print("Enter title: ");
         String title = scanner.nextLine();
@@ -101,7 +103,22 @@ public class Main {
         int itemId = scanner.nextInt();
         scanner.nextLine();
 
-        LibraryItem<Integer> item = new LibraryItem<>(title, author, itemId);
+        LibraryItem<Integer> item;
+
+        if (itemType.equals("book")) {
+            System.out.print("Enter page count: ");
+            int pageCount = scanner.nextInt();
+            scanner.nextLine();
+            item = new Book<>(title, author, itemId, pageCount);
+        } else if (itemType.equals("dvd")) {
+            System.out.print("Enter duration in minutes: ");
+            double duration = scanner.nextDouble();
+            scanner.nextLine();
+            item = new DVD<>(title, author, itemId, duration);
+        } else {
+            throw new IllegalArgumentException("Invalid item type. Please enter either book or dvd.");
+        }
+
         catalog.addItem(item);
     }
 
