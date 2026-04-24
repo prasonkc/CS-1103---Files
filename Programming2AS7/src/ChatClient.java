@@ -89,8 +89,8 @@ public class ChatClient {
             try (BufferedReader messageIn =
                          new BufferedReader(
                                  new InputStreamReader(clientSocket.getInputStream()))) {
-                String incomingMessage;
 
+                String incomingMessage;
                 while ((incomingMessage = messageIn.readLine()) != null) {
                     System.out.print("\r");
 
